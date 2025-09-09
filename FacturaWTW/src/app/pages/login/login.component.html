@@ -1,9 +1,59 @@
-<div class="container mt-5" style="max-width:420px">
-  <h3>FacturaWTW - Login</h3>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="mb-3"><label>Usuario</label><input class="form-control" formControlName="username" /></div>
-    <div class="mb-3"><label>Contraseña</label><input type="password" class="form-control" formControlName="password" /></div>
-    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-    <button class="btn btn-primary">Entrar</button>
-  </form>
+<div class="container d-flex justify-content-center align-items-center mt-5">
+  <div class="card shadow-sm login-card">
+    <div class="card-header bg-primary text-white text-center">
+      <h4 class="mb-0">FacturaWTW</h4>
+      <small>Iniciar sesión</small>
+      <h6 class="mb-0">Para autenticarse ingresar Usuario y Contraseña: AdminWTW </h6>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- Usuario -->
+        <div class="mb-3">
+          <label for="user" class="form-label">Usuario</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-person"></i>
+            </span>
+            <input
+              id="user"
+              type="text"
+              class="form-control"
+              formControlName="User"
+              placeholder="Ingresa tu usuario"
+            />
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-lock"></i>
+            </span>
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="Password"
+              placeholder="********"
+            />
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div *ngIf="error" class="alert alert-danger py-2">
+          {{ error }}
+        </div>
+
+        <!-- Botón -->
+        <div class="d-grid">
+          <button class="btn btn-primary" [disabled]="form.invalid">
+            <i class="bi bi-box-arrow-in-right"></i> Entrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

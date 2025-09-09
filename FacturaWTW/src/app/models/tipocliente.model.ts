@@ -1,0 +1,1 @@
+export interface TipoCliente { Id?: number; TipoCliente: string; }

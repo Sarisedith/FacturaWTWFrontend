@@ -1,0 +1,32 @@
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.75rem;
+}
+
+.login-card .card-header {
+  border-bottom: none;
+  padding: 1.5rem 1rem;
+}
+
+.login-card h4 {
+  font-weight: 600;
+}
+
+.login-card .form-label {
+  font-weight: 500;
+}
+
+.login-card .input-group-text {
+  background-color: #f8f9fa;
+  border-right: none;
+}
+
+.login-card .form-control {
+  border-left: none;
+}
+
+.login-card button {
+  font-weight: 600;
+  border-radius: 0.5rem;
+}

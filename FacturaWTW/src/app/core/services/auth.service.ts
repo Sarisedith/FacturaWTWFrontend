@@ -12,10 +12,26 @@ export class AuthService {
 
   login(payload: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.base}/login`, payload).pipe(
-      map(res => { if (res && (res as any).token) { localStorage.setItem('token', (res as any).token); } return res; })
+      map(res => { 
+        if (res && res.token) { 
+          localStorage.setItem('token', res.token); 
+        } else {
+          throw new Error('No se recibió token en la respuesta');
+        }
+        return res; 
+      })
     );
   }
 
   logout() { localStorage.removeItem('token'); }
-  isAuthenticated() { return !!localStorage.getItem('token'); }
+  
+  isAuthenticated() { 
+    const token = localStorage.getItem('token');
+    return !!token && token !== 'null' && token !== 'undefined';
+  }
+
+  getToken(): string | null {
+    const token = localStorage.getItem('token');
+    return token && token !== 'null' && token !== 'undefined' ? token : null;
+  }
 }

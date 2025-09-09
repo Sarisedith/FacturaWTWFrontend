@@ -1,0 +1,104 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        {{ isEdit ? "Editar Cliente" : "Nuevo Cliente" }}
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="save()"
+        aria-live="polite"
+        novalidate
+      >
+        <!-- Razón Social -->
+        <div class="mb-3">
+          <label for="razon" class="form-label">Razón Social *</label>
+          <input
+            id="razon"
+            type="text"
+            class="form-control"
+            formControlName="RazonSocial"
+            placeholder="Ej: Comercial XYZ S.A."
+          />
+          <div
+            *ngIf="campo('RazonSocial')?.touched && campo('RazonSocial')?.invalid"
+            class="text-danger small mt-1"
+          >
+            <div *ngIf="campo('RazonSocial')?.errors?.['required']">
+              La razón social es obligatoria.
+            </div>
+            <div *ngIf="campo('RazonSocial')?.errors?.['maxlength']">
+              Máx 200 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tipo Cliente -->
+        <div class="mb-3">
+          <label for="tipo" class="form-label">Tipo de Cliente *</label>
+          <select
+            id="tipo"
+            class="form-select"
+            formControlName="IdTipoCliente"
+          >
+            <option [ngValue]="null">-- Selecciona --</option>
+            <option *ngFor="let t of tipoclientes" [ngValue]="t.Id">
+              {{ t.TipoCliente }}
+            </option>
+          </select>
+          <div
+            *ngIf="campo('IdTipoCliente')?.touched && campo('IdTipoCliente')?.invalid"
+            class="text-danger small mt-1"
+          >
+            Selecciona un tipo de cliente.
+          </div>
+        </div>
+
+        <!-- RFC -->
+        <div class="mb-3">
+          <label for="rfc" class="form-label">RFC</label>
+          <input
+            id="rfc"
+            type="text"
+            class="form-control"
+            formControlName="RFC"
+            placeholder="Ej: XAXX010101000"
+          />
+          <div
+            *ngIf="campo('RFC')?.touched && campo('RFC')?.invalid"
+            class="text-danger small mt-1"
+          >
+            <div *ngIf="campo('RFC')?.errors?.['maxlength']">
+              Máx 50 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-end align-items-center mt-4">
+          <button
+            type="submit"
+            class="btn btn-primary me-2"
+            [disabled]="form.invalid || loading"
+          >
+            {{ isEdit ? "Actualizar" : "Guardar" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="cancelar()"
+            [disabled]="loading"
+          >
+            Cancelar
+          </button>
+          <div *ngIf="loading" class="ms-3 text-muted small">
+            ⏳ Cargando...
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

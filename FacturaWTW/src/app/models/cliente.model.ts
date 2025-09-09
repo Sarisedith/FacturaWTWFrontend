@@ -1,1 +1,1 @@
-export interface Cliente { id?: number; nombre: string; identificacion?: string; direccion?: string; telefono?: string; email?: string; }
+export interface Cliente { Id?: number; RazonSocial: string; IdTipoCliente: number; RFC?: string }

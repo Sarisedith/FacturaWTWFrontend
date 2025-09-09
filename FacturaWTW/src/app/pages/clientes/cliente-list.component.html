@@ -1,5 +1,57 @@
-<div class="container mt-4">
-  <h4>Clientes</h4>
-  <table class="table"><thead><tr><th>ID</th><th>Nombre</th><th>Email</th></tr></thead>
-    <tbody><tr *ngFor="let c of clientes"><td>{{c.id}}</td><td>{{c.nombre}}</td><td>{{c.email}}</td></tr></tbody></table>
+\<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+    >
+      <h4 class="mb-0">Lista de Clientes</h4>
+      <a routerLink="/clientes/nuevo" class="btn btn-light btn-sm">
+        ➕ Nuevo Cliente
+      </a>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Razón Social</th>
+            <th>Tipo Cliente</th>
+            <th>RFC</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td>{{ cliente.Id }}</td>
+            <td>{{ cliente.RazonSocial }}</td>
+            <td>
+              <span class="badge bg-info text-dark">
+                {{ cliente.IdTipoCliente }}
+              </span>
+            </td>
+            <td>{{ cliente.RFC || 'N/A' }}</td>
+            <td class="text-center">
+              <a
+                [routerLink]="['/clientes', cliente.Id, 'editar']"
+                class="btn btn-sm btn-warning"
+              >
+                ✏️ Editar
+              </a>
+              <button
+                class="btn btn-sm btn-danger ms-2"
+                (click)="eliminar(cliente.Id)"
+              >
+                🗑️ Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="clientes.length === 0">
+            <td colspan="5" class="text-center text-muted">
+              No hay clientes registrados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,129 @@
+<div class="container mt-4 producto-form">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        {{ isEdit ? 'Editar Producto' : 'Nuevo Producto' }}
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+        <!-- Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del producto *</label>
+          <input
+            id="nombre"
+            type="text"
+            class="form-control"
+            formControlName="NombreProducto"
+            placeholder="Ej: Laptop Dell Inspiron"
+          />
+          <div
+            *ngIf="form.get('NombreProducto')?.touched && form.get('NombreProducto')?.invalid"
+            class="text-danger small mt-1"
+          >
+            <div *ngIf="form.get('NombreProducto')?.errors?.['required']">
+              El nombre es obligatorio.
+            </div>
+            <div *ngIf="form.get('NombreProducto')?.errors?.['maxlength']">
+              Máx
+              {{
+                form.get('NombreProducto')?.errors?.['maxlength']
+                  ?.requiredLength
+              }}
+              caracteres.
+            </div>
+          </div>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio unitario *</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input
+              id="precio"
+              type="number"
+              class="form-control"
+              formControlName="PrecioUnitario"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+            />
+          </div>
+          <div
+            *ngIf="form.get('PrecioUnitario')?.touched && form.get('PrecioUnitario')?.invalid"
+            class="text-danger small mt-1"
+          >
+            <div *ngIf="form.get('PrecioUnitario')?.errors?.['required']">
+              El precio es obligatorio.
+            </div>
+            <div *ngIf="form.get('PrecioUnitario')?.errors?.['min']">
+              El precio debe ser mayor o igual a 0.
+            </div>
+          </div>
+        </div>
+
+        <!-- Ext -->
+        <div class="mb-3">
+          <label for="ext" class="form-label">Ext</label>
+          <input
+            id="ext"
+            type="text"
+            class="form-control"
+            formControlName="Ext"
+            placeholder="Referencia adicional (opcional)"
+          />
+          <div
+            *ngIf="form.get('Ext')?.touched && form.get('Ext')?.invalid"
+            class="text-danger small mt-1"
+          >
+            <div *ngIf="form.get('Ext')?.errors?.['maxlength']">
+              Máx
+              {{
+                form.get('Ext')?.errors?.['maxlength']?.requiredLength
+              }}
+              caracteres.
+            </div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="d-flex align-items-center gap-2 mt-4">
+          <button
+            type="submit"
+            class="btn btn-success px-4"
+            [disabled]="form.invalid || (loading ?? false)"
+          >
+            <i class="bi bi-save"></i>
+            {{ isEdit ? 'Actualizar' : 'Guardar' }}
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary px-4"
+            (click)="cancelar()"
+            [disabled]="(loading ?? false)"
+          >
+            <i class="bi bi-x-circle"></i> Cancelar
+          </button>
+
+          <div *ngIf="loading" class="ms-3 text-muted">
+            <div class="spinner-border spinner-border-sm me-2"></div>
+            Procesando...
+          </div>
+        </div>
+      </form>
+
+      <!-- Vista previa -->
+      <div *ngIf="form.valid" class="mt-4 border-top pt-3">
+        <h5 class="text-primary">Vista previa</h5>
+        <p><strong>Nombre:</strong> {{ form.value.NombreProducto }}</p>
+        <p>
+          <strong>Precio:</strong> {{ form.value.PrecioUnitario | currency }}
+        </p>
+        <p><strong>Ext:</strong> {{ form.value.Ext }}</p>
+      </div>
+    </div>
+  </div>
+</div>

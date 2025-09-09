@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">Listado de Facturas</h4>
+      <button class="btn btn-light btn-sm" (click)="nuevaFactura()">
+        ➕ Nueva Factura
+      </button>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Número</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of facturas">
+            <td>{{ f.Id }}</td>
+            <td>{{ f.NumeroFactura }}</td>
+            <td>
+              <!-- Si tienes navegación a Cliente, se puede mejorar -->
+              <span class="badge bg-info text-dark">
+                {{ f.Cliente?.RazonSocial || ('Cliente ' + f.IdCliente) }}
+              </span>
+            </td>
+            <td>{{ f.FechaEmisionFactura | date: 'shortDate' }}</td>
+            <td class="fw-bold">{{ f.TotalFactura | currency }}</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-warning me-2" (click)="editar(f.Id)">
+                ✏️ Editar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="facturas.length === 0">
+            <td colspan="6" class="text-center text-muted">
+              No hay facturas registradas.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
