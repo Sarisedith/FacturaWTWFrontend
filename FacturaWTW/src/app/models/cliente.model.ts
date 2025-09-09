@@ -1,0 +1,1 @@
+export interface Cliente { id?: number; nombre: string; identificacion?: string; direccion?: string; telefono?: string; email?: string; }

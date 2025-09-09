@@ -1,0 +1,1 @@
+export interface Producto { id?: number; nombre: string; codigo?: string; precioUnitario: number; imagenUrl?: string; stock?: number; }

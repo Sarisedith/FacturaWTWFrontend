@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <h4>Crear Factura</h4>
+  <form [formGroup]="facturaForm" (ngSubmit)="guardar()">
+    <div class="mb-3"><label>Número factura</label><input class="form-control" formControlName="numeroFactura"></div>
+    <div class="mb-3"><label>Cliente</label><select class="form-control" formControlName="clienteId"><option *ngFor="let c of clientes" [value]="c.id">{{c.nombre}}</option></select></div>
+    <div formArrayName="detalles"><div *ngFor="let d of detalles.controls; let i=index" [formGroupName]="i" class="mb-2">
+      <select formControlName="productoId" class="form-control mb-1"><option *ngFor="let p of productos" [value]="p.id">{{p.nombre}}</option></select>
+      <div class="row"><div class="col"><input type="number" class="form-control" formControlName="cantidad" placeholder="Cantidad"></div><div class="col"><input type="number" class="form-control" formControlName="precioUnitario" placeholder="Precio unitario"></div></div>
+    </div></div>
+    <button class="btn btn-secondary mt-2" type="button" (click)="addDetalle()">Agregar</button>
+    <button class="btn btn-primary mt-3">Guardar</button>
+  </form>
+</div>

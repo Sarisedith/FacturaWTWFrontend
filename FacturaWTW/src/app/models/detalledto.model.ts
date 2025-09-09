@@ -1,0 +1,1 @@
+export interface DetalleFacturaDto { productoId: number; nombreProducto?: string; cantidad: number; precioUnitario: number; total?: number; }

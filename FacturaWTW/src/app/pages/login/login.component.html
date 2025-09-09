@@ -1,0 +1,9 @@
+<div class="container mt-5" style="max-width:420px">
+  <h3>FacturaWTW - Login</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3"><label>Usuario</label><input class="form-control" formControlName="username" /></div>
+    <div class="mb-3"><label>Contraseña</label><input type="password" class="form-control" formControlName="password" /></div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <button class="btn btn-primary">Entrar</button>
+  </form>
+</div>

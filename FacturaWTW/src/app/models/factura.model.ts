@@ -1,0 +1,2 @@
+import { DetalleFacturaDto } from './detalledto.model';
+export interface FacturaCreacionDto { numeroFactura: string; clienteId: number; fecha?: string; detalles: DetalleFacturaDto[]; subtotal?: number; impuestos?: number; total?: number; }

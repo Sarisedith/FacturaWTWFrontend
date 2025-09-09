@@ -1,0 +1,5 @@
+<div class="container mt-4">
+  <h4>Clientes</h4>
+  <table class="table"><thead><tr><th>ID</th><th>Nombre</th><th>Email</th></tr></thead>
+    <tbody><tr *ngFor="let c of clientes"><td>{{c.id}}</td><td>{{c.nombre}}</td><td>{{c.email}}</td></tr></tbody></table>
+</div>
